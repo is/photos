@@ -7,6 +7,8 @@ def rename_one(path):
     for root, dirs, files in os.walk(path):
         taginfos = {}
         for file in files:
+            if file[0] == '.':
+                continue
             if file.find('__') != -1:
                 continue
             full_path = os.path.join(root, file)
@@ -21,8 +23,8 @@ def rename_one(path):
                 continue
             new_name = rename_arw.exif_to_filename(taginfos[basename])
             print(f'''{root}/{basename}.{ext} => {new_name}.{ext}''')
-            #os.rename(f'{root}/{basename}.{ext}', 
-            #    f'{root}/{new_name}.{ext}')
+            os.rename(f'{root}/{basename}.{ext}', 
+                f'{root}/{new_name}.{ext}')
 
 def main():
     path = sys.argv[1]
