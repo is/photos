@@ -18,6 +18,7 @@ def exif_to_filename(tags):
 def image_exif_tags(fn):
     with open(fn, 'rb') as fin:
         tags = exifread.process_file(fin)
+        tags['__source'] = fn
     return tags
 
 def new_file(full_path, tags=None):
@@ -27,6 +28,10 @@ def new_file(full_path, tags=None):
     if tags == None:
         tags = image_exif_tags(full_path)
     new_fn = exif_to_filename(tags)
+    basename = os.path.basename(tags['__source'])
+    basename, _, ext = basename.rpartition('.')
+    if len(basename) == 8:
+        return os.path.join(dirname, f'{new_fn}_{basename[3:]}.{ext}')
     return os.path.join(dirname, f'{new_fn}.{ext}')
     
 
