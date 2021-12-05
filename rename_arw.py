@@ -12,6 +12,11 @@ def exif_to_filename(tags):
     else:
         model = 'a7r4'
     ts = ts.values.replace(':', '').replace(' ', '_')
+
+    basename = os.path.basename(tags['__source'])
+    basename, _, ext = basename.rpartition('.')
+    if len(basename) == 8:
+        return f'{model}_{basename[4:]}__{ts}'
     return f'{model}__{ts}'
 
 

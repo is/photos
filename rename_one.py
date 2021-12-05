@@ -21,8 +21,8 @@ def rename_one(path):
                 continue
             new_name = rename_arw.exif_to_filename(taginfos[basename])
             print(f'''{root}/{basename}.{ext} => {new_name}.{ext}''')
-            os.rename(f'{root}/{basename}.{ext}', 
-                f'{root}/{new_name}.{ext}')
+            #os.rename(f'{root}/{basename}.{ext}', 
+            #    f'{root}/{new_name}.{ext}')
 
 def main():
     path = sys.argv[1]
