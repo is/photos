@@ -8,9 +8,9 @@ def exif_to_filename(tags):
     model = tags['Image Model']
     ts = tags['Image DateTime']
     if model.values == 'ILCE-6400':
-        model = 'a6400'
+        model = 'a'
     else:
-        model = 'a7r4'
+        model = 'A'
     ts = ts.values.replace(':', '').replace(' ', '_')
 
     basename = os.path.basename(tags['__source'])
