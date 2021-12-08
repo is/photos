@@ -5,6 +5,7 @@ import os
 def rename_one(path):
     print(path)
     for root, dirs, files in os.walk(path):
+        files = sorted(files)
         renames = []
         rename_map = {}
         taginfos = {}
@@ -35,6 +36,11 @@ def rename_one(path):
                     rename_map[basename] = new_name
                     renames.append((basename, new_name))
 
+        if len(renames) != 0:
+            with open(os.path.join(root, ".rename.csv"), 'wb') as cout:
+                cout.write("\n".join([f'{a[0]},{a[1]}' for a in renames]).encode('utf8'))
+                cout.write("\n".encode('utf8'))
+
         for file in files:
             basename, _, ext = file.rpartition('.')
             if basename not in rename_map:
@@ -43,6 +49,7 @@ def rename_one(path):
             print(f'''{root}/{basename}.{ext} => {new_name}.{ext}''')
             os.rename(f'{root}/{basename}.{ext}', 
                 f'{root}/{new_name}.{ext}')
+
 
 def main():
     path = sys.argv[1]
