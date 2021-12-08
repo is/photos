@@ -8,7 +8,7 @@ def exif_to_filename(tags):
     model = tags['Image Model']
     ts = tags['Image DateTime']
     if model.values == 'ILCE-6400':
-        model = 'a'
+        model = 'B'
     else:
         model = 'A'
     ts = ts.values.replace(':', '').replace(' ', '_')

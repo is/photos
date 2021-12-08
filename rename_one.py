@@ -16,7 +16,7 @@ def rename_one(path):
             basename, _, ext = file.rpartition('.')
             if basename not in rename_map:
                 if basename.startswith('a6400_'):
-                    new_name = basename.replace('a6400_', 'a_')
+                    new_name = basename.replace('a6400_', 'B_')
                     rename_map[basename] = new_name
                     renames.append((basename, new_name))
                 if basename.startswith('a7r4_'):
