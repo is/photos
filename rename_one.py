@@ -19,7 +19,11 @@ def rename_one(path):
                     new_name = basename.replace('a6400_', 'B_')
                     rename_map[basename] = new_name
                     renames.append((basename, new_name))
-                if basename.startswith('a7r4_'):
+                elif basename.startswith('a_'):
+                    new_name = basename.replace('a_', 'B_')
+                    rename_map[basename] = new_name
+                    renames.append((basename, new_name))
+                elif basename.startswith('a7r4_'):
                     new_name = basename.replace('a7r4_', 'A_')
                     rename_map[basename] = new_name
                     renames.append((basename, new_name))
