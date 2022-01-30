@@ -1,8 +1,9 @@
+import sys
 import xml.etree.ElementTree as ET
 
 def get_file_list(fn):
     fns = []
-    tree = ET.parse('IDCLabelInfo.xml')
+    tree = ET.parse(fn)
     root = tree.getroot()
     level0 = root[0]
     for node in level0:
@@ -12,7 +13,7 @@ def get_file_list(fn):
 
 
 if __name__ == '__main__':
-    fns = get_file_list('IDCLabelInfo.xml')
+    fns = get_file_list(sys.argv[1])
     for fn in fns:
-        print(f'cp {fn} ../KEEP')
+        print(f'mv {fn} ../KEEP')
 
