@@ -1,4 +1,5 @@
 import sys
+import os
 import xml.etree.ElementTree as ET
 
 def get_file_list(fn):
@@ -13,7 +14,11 @@ def get_file_list(fn):
 
 
 if __name__ == '__main__':
-    fns = get_file_list(sys.argv[1])
+    if len(sys.argv) >= 2:
+        idc_fn = sys.argv[1]
+    elif os.path.isfile('IDCLabelInfo.xml'):
+        idc_fn = 'IDCLabelInfo.xml'
+    fns = get_file_list(idc_fn)
     for fn in fns:
         print(f'mv {fn} ../KEEP')
 
