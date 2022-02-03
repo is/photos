@@ -44,6 +44,7 @@ def rename_one(path):
                     new_name = rename_arw.exif_to_filename(taginfos[basename])
                     rename_map[basename] = new_name
                     renames.append((basename, new_name))
+                    print(f'-> {full_path} -> {new_name}')
 
         if len(renames) != 0:
             with open(os.path.join(root, ".rename.csv"), 'wb') as cout:
@@ -66,7 +67,7 @@ def rename_one(path):
                 if basename not in rename_map:
                     continue
                 new_name = rename_map[basename]
-                print(f'''{root}/preview/{basename}.{ext} => {new_name}.{ext}''')
+                print(f'''{root}/preview/{basename}.{ext} => preview/{new_name}.{ext}''')
                 os.rename(f'{root}/preview/{basename}.{ext}',
                     f'{root}/preview/{new_name}.{ext}')
 
