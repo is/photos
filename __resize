@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. __conda
+conda activate sony
+cd ~/src/photos
+python resize_1.py /Users/is/P3/JPEG
