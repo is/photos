@@ -101,13 +101,14 @@ def is_style_0(img, **kwargs):
 
 def process(infn, outfn):
     im = Image.open(infn)
+    exif = im.info['exif']
     new_size = calc_size(im.size, 1920)
     print(f'''{infn} -> {os.path.basename(outfn)} : {im.size} -> {new_size}''')
     out = im.resize(new_size, resample=Image.LANCZOS)
     out = out.convert('RGBA')
     out = is_style_0(out, text='IS')
     out = out.convert('RGB')
-    out.save(outfn, quality=100, subsampling=0)
+    out.save(outfn, quality=100, subsampling=0, exif=exif)
 
 
 # ---
