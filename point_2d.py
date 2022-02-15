@@ -58,15 +58,14 @@ class Rect(tuple):
     def extend(self, *p):
         P = Point2D(*p)
         return Rect(self[0], self[1] + P)
+    ex = extend
 
     def center_extend(self, *p):
         P =Point2D(*p) / 2
         return Rect(self[0] - P, self[1] + P)
+    exc = center_extend
 
-    # def __repr__(self):
-    #     return f'Rect({self.P0.x},{self.P0.y},{self.P1.x},{self.P1.y})'
-
-
+# 
 P2 = Point2D
 R = Rect
 
