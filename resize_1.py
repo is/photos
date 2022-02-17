@@ -129,10 +129,10 @@ def watermark_is_1(img, **kwargs):
     r = r.center_extend(P(C['padding']) * g).center_extend(P(C['paddingx'], 0) * g)
 
     r0 = R(r[0] / g, r[1] / g)
-    #print('light')
-    #print(sub_rect_light(img, r0))
+    # print('light')
+    # print(sub_rect_light(img, r0))
     bg_light = sub_rect_light(img, r0)
-    print(bg_light)
+    # print(bg_light)
     border_color = bg
     if bg_light >= 190:
         bg = (255-bg[0], 255-bg[1], 255-bg[2], bg[3])
