@@ -39,7 +39,11 @@ def calc_size(shape, max_size):
     else:
         side = 'h'
         rate = 1.0 * max_size / h
-    return (int(w * rate), int(h * rate))
+    wnew = int(shape[0] * rate)
+    hnew = int(shape[1] * rate)
+    if hnew == 1079:
+        hnew = 1080
+    return (wnew, hnew)
 
 # --
 def border(img, border_width=5, border_color=(255, 255, 255, 128)):
