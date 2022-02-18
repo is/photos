@@ -1,0 +1,20 @@
+#!/bin/sh
+
+date=$1
+pos=$2
+
+cd ~/P
+
+if [ ! -d $1 ] ; then
+exit 0
+fi
+
+mkdir ~/P/KEEP
+cd ~/P/$date
+__label_3
+__label_3 | wc -l
+__label_3 | sh -s - 
+cd ~/P
+mv $date ${date}__${pos}
+mv KEEP ${date}__KEEP_${pos}
+__rename ~/P
