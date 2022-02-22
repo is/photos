@@ -21,10 +21,10 @@ def gen_image_list(dir):
         if lext not in ('.jpeg', '.jpg'):
             continue
 
-        if name.endswith('__'):
+        if name.endswith('__1'):
             continue
 
-        pfn = fn.replace(ext, "__" + ext)
+        pfn = fn.replace(ext, "__1" + ext)
         if pfn in fns:
             continue
         pairs.append((fn, pfn))
@@ -155,7 +155,7 @@ def watermark_is_1(img, **kwargs):
 def process(infn, outfn):
     im = Image.open(infn)
     exif = im.info['exif']
-    new_size = calc_size(im.size, 1920)
+    new_size = calc_size(im.size, 2048)
     print(f'''{infn} -> {os.path.basename(outfn)} : {im.size} -> {new_size}''')
     out = im.resize(new_size, resample=Image.LANCZOS)
     out = out.convert('RGBA')
