@@ -8,18 +8,17 @@ from point_2d import Point2D as P, Rect as R
 
 class Config:
     FONT_PATH = 'font/ubuntu/Ubuntu-C.ttf'
-    FONT_SIZE = 480
+    FONT_SIZE = 440
+    PADDING = 160
+    PADDING_X = 120
+    RADIUS = 320
     LOGO_SIZE_BIG = 720
     LOGO_SIZE = 64
     LOGO_TEXT = 'IS'
     BG_COLOR = (255, 255, 255, 128)
     FG_COLOR = (32, 32, 32, 16)
-    PADDING = 80
-    PADDING_X = 160
-    RADIUS = 240
     LOGO_OFFSET = (60, 60)
-    
-    
+
 
     
 # ---
