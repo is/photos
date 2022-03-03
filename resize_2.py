@@ -24,6 +24,9 @@ def gen_image_list(dir):
         if name.endswith('__2'):
             continue
 
+        if name[-3:-1] == '__':
+            continue
+
         pfn = fn.replace(ext, "__2" + ext)
         if pfn in fns:
             continue
