@@ -6,6 +6,8 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from point_2d import Point2D as P, Rect as R
 
+from resize_common import calc_size
+
 IMG_DIR = '/Users/is/P3/JPEG'
 FONT_0_FN = 'font/ubuntu/Ubuntu-C.ttf'
 # fn = '/Users/is/P3/JPEG/A_02189__20220210_133505.jpg'
@@ -34,19 +36,7 @@ def gen_image_list(dir):
 
     return pairs
 
-def calc_size(shape, max_size):
-    w, h = shape
-    if w > h:
-        side = 'w'
-        rate = 1.0 * max_size / w
-    else:
-        side = 'h'
-        rate = 1.0 * max_size / h
-    wnew = int(shape[0] * rate)
-    hnew = int(shape[1] * rate)
-    if hnew == 1079:
-        hnew = 1080
-    return (wnew, hnew)
+
 
 # --
 def border(img, border_width=5, border_color=(255, 255, 255, 128)):
