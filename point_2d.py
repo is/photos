@@ -44,6 +44,9 @@ class Point2D(tuple):
     def extend(self, *p):
         r = Rect(self, self)
         return r.extend(*p)
+    
+    exc = center_extend
+    ex = extend
 
 
 class Rect(tuple):
@@ -61,9 +64,14 @@ class Rect(tuple):
     ex = extend
 
     def center_extend(self, *p):
-        P =Point2D(*p) / 2
+        P = Point2D(*p) / 2
         return Rect(self[0] - P, self[1] + P)
     exc = center_extend
+
+    @property
+    def shape(self) -> Point2D:
+        return self[1] - self[0]
+
 
 # 
 P2 = Point2D
@@ -76,6 +84,10 @@ if __name__ == '__main__':
     print(P1)
     P2 = P1 - 5
     print(P2)
+
+    P3 = Point2D(30, 30)
+    print(P2.exc(10, 10))
+    print(P2.exc(10, 10).shape)
     # print(P0.add(5))
     # P0.sub(30, 30)
     # print(P0)

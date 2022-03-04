@@ -7,6 +7,8 @@ from PIL import Image, ImageDraw, ImageFont
 from point_2d import Point2D as P, Rect as R
 
 import resize_common
+import resize_common as common
+from resize_common import calc_size
 
 IMG_DIR = '/Users/is/P3/JPEG'
 FONT_0_FN = 'font/ubuntu/Ubuntu-C.ttf'
@@ -36,7 +38,6 @@ def gen_image_list(dir):
 
     return pairs
 
-calc_size = resize_common.calc_size
 
 # --
 def border(img, border_width=5, border_color=(255, 255, 255, 128)):
@@ -53,7 +54,7 @@ def border(img, border_width=5, border_color=(255, 255, 255, 128)):
 IS_STYLE_DEFAULT_CFG = {
     'text': 'IS',
     'gain': 5,
-    'logo_offset': (60, 60),
+    'logo_offset': (50, 50),
     'font_size': 45,
     'bottum_width': 10,
     'bgcolor': (255, 255, 255, 128),
@@ -81,7 +82,7 @@ def watermark_is_2(ctx, img, **kwargs):
     logo_img = Image.open(C['logo_image_path'])
     logo_img = logo_img.resize(C['logo_size'], resample=Image.LANCZOS)
     base_offset = P(C['logo_offset'])
-    base_center = draw_size - base_offset
+    base_center = common.affix_to_border(draw_size, base_offset)[4]
     r = base_center.center_extend(logo_img.size)
 
     bg_light = sub_rect_light(img, r)
