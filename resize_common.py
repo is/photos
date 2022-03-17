@@ -23,6 +23,7 @@ def affix_to_border(box:P, off:P) -> Sequence[P]:
 def align_n(num:int, base:int) -> int:
     return int(math.floor((num / base) + 0.5) * base)
 
+
 def calc_size(shape:Sequence[int], max_size:int) -> Tuple[int, int]:
     w, h = shape
     if w > h:
