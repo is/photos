@@ -31,6 +31,8 @@ def calc_size(shape:Sequence[int], max_size:int) -> Tuple[int, int]:
     else:
         side = 'h'
         rate = 1.0 * max_size / h
+    if (rate >= 1.0):
+        return (w, h)
     wnew = int(shape[0] * rate)
     hnew = int(shape[1] * rate)
     wnew = align_n(wnew, 4)
