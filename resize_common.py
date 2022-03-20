@@ -1,3 +1,4 @@
+import os
 import math
 from typing import Sequence, Tuple, Union
 from point_2d import Point2D as P, Rect as R
@@ -39,3 +40,14 @@ def calc_size(shape:Sequence[int], max_size:int) -> Tuple[int, int]:
     wnew = align_n(wnew, 4)
     hnew = align_n(hnew, 4)
     return (wnew, hnew)
+
+
+# -- 判断是否是原始文件
+def is_origin_path(fn:str) -> bool:
+    basename = os.path.basename(fn)
+    name, ext = os.path.splitext(basename)
+    if name[-3:-1] == '__':
+        return False
+    if name.endswith('__preview'):
+        return False
+    return True

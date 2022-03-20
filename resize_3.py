@@ -8,7 +8,7 @@ from point_2d import Point2D as P, Rect as R
 
 import resize_common
 import resize_common as common
-from resize_common import calc_size
+from resize_common import calc_size, is_origin_path
 
 
 LOGO_IMG = 'img/logo_is_720__1.png'
@@ -27,7 +27,7 @@ def gen_image_list(dir):
         if lext not in ('.jpeg', '.jpg'):
             continue
 
-        if name.endswith('__3'):
+        if not is_origin_path(fn):
             continue
 
         if name[-3:-1] == '__':

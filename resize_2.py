@@ -8,7 +8,7 @@ from point_2d import Point2D as P, Rect as R
 
 import resize_common
 import resize_common as common
-from resize_common import calc_size
+from resize_common import calc_size, is_origin_path
 
 IMG_DIR = '/Users/is/P3/JPEG'
 FONT_0_FN = 'font/ubuntu/Ubuntu-C.ttf'
@@ -25,10 +25,7 @@ def gen_image_list(dir):
         if lext not in ('.jpeg', '.jpg'):
             continue
 
-        if name.endswith('__2'):
-            continue
-
-        if name[-3:-1] == '__':
+        if not is_origin_path(fn):
             continue
 
         pfn = fn.replace(ext, "__2" + ext)
