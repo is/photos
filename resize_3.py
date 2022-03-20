@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 from point_2d import Point2D as P, Rect as R
 
 import resize_common
+import resize_common as co
 import resize_common as common
 from resize_common import calc_size, is_origin_path
 

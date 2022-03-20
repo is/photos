@@ -10,7 +10,7 @@ def getUserPages( params ) :
 	return makeApiCall( url, endpointParams, params['debug'] ) # make the api call
 
 params = getCreds() # get creds
-params['debug'] = 'no' # set debug
+params['debug'] = 'yes' # set debug
 response = getUserPages( params ) # get debug info
 
 for i in range(len(response['json_data']['data'])):
