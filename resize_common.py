@@ -10,6 +10,8 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 
+IMG_DIR = '/Users/is/P3/JPEG'
+
 #  0  1  2
 #  7     3
 #  6  5  4
@@ -190,3 +192,16 @@ def watermark_is_1(img, **kwargs):
     l0 = l0.resize(img.size, resample=Image.LANCZOS)
     img = Image.alpha_composite(img, l0)
     return img
+
+
+
+# ---
+def crop_to_square(img):
+    w, h = img.size
+    if w == h:
+        return img
+    if w > h:
+        box = ((w - h) / 2, 0, (w + h) / 2, h)
+    else:
+        box = (0, (h - w) / 2, w, (h + w) / 2)
+    return img.crop(box)
