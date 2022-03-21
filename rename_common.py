@@ -53,11 +53,14 @@ def rename__jpg(full_path:str) -> Tuple[str, str]:
     basename, _, ext = basename.rpartition('.')
     img = Image.open(full_path)
     exif = img._getexif()
-    if not exif:
+    ts = None
+    if exif:
+        if 36868 in exif:
+            ts = exif[36868]
+        elif 36867 in exif:
+            ts = exif[36867]
+    if not ts:
         return (full_path, basename)
-    if 36868 not in exif:
-        return (full_path, basename)
-    ts = exif[36868]
     new_name = new_basename_with_ts(basename, ts)
     new_full_path = full_path.replace(basename, new_name)
     return (new_full_path, new_name)
@@ -71,7 +74,6 @@ def rename__heif(full_path:str) -> Tuple[str, str]:
     img = pyheif.read_heif(full_path, False)
     ts = None
     for meta in img.metadata:
-        print(meta['type'])
         if meta['type'] == 'Exif':
             exif = Image.Exif()
             exif.load(meta['data'])
