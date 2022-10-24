@@ -19,9 +19,11 @@ def list_with_keep_dir(basepath):
     return r
 
 def main():
+    base_dir = "."
     if len(sys.argv) >= 2:
-        os.chdir(sys.argv[1])
-    dirs = list_with_keep_dir(".")
+        base_dir = sys.argv[1]
+        
+    dirs = list_with_keep_dir(base_dir)
     dirs.sort()
     for d in dirs:
         print(d)
