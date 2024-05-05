@@ -2,6 +2,7 @@ import sys
 import os
 import binascii
 import glob
+import shutil
 
 import xml.etree.ElementTree as ET
 
@@ -21,10 +22,13 @@ class NikonMeta(BaseModel):
 
 # ---
 def read_nikon_meta(fn:str) -> NikonMeta:
-    
+    print(fn)
     tree_0 = ET.parse(fn)
     root_0 = tree_0.getroot()
 
+    xmp_node = root_0[0][0].find('ast:XMLPackets', namespaces=NS_MAP)
+    if xmp_node == None:
+        return NikonMeta(fn=os.path.basename(fn))
     xmp_text = root_0[0][0].find('ast:XMLPackets', namespaces=NS_MAP)[0].text
     xmp_body = binascii.a2b_base64(xmp_text).decode('utf-8')
     xmp_root = ET.fromstring(xmp_body)
@@ -61,12 +65,23 @@ def nikon_s1(src:str, dest:str):
         if meta.rating != 'UNSET' or meta.label != 'UNSET':
             id = meta.fn.partition('.')[0]
             copy_set[id] = id
-    print(copy_set)
 
-        
+    for id in copy_set.keys():
+        if not os.path.exists(f'{dest}/{id}.NEF'):
+            try:
+                shutil.copy2(f'{src}/{id}.NEF', f'{dest}/{id}.NEF')
+            except FileNotFoundError as E:
+                pass
+        if not os.path.exists(f'{dest}/{id}.JPG'):
+            shutil.copy2(f'{src}/{id}.JPG', f'{dest}/{id}.JPG')
+
+        shutil.copy2(f'{src}/NKSC_PARAM/{id}.NEF.nksc',
+            f'{dest}/NKSC_PARAM/{id}.NEF.nksc')
+        shutil.copy2(f'{src}/NKSC_PARAM/{id}.JPG.nksc',
+            f'{dest}/NKSC_PARAM/{id}.JPG.nksc')
 
 if __name__ == '__main__':
     # scan_nksc_param_dir(f'{os.environ["HOME"]}/Z0/NIKON/007')
-    nikon_s1(f'{os.environ["HOME"]}/Z0/NIKON/007',
-        f'{os.environ["HOME"]}/Z0/N1')
+    nikon_s1(f'{os.environ["HOME"]}/Z0/NIKON/006',
+        f'{os.environ["HOME"]}/Z0/NI')
 
