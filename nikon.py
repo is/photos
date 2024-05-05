@@ -40,7 +40,7 @@ def read_nikon_meta(fn:str) -> NikonMeta:
     if rating_node != None:
         rating = rating_node.text
 
-    print(f'META: {fn} {label} {rating}')
+    # print(f'META: {fn} {label} {rating}')
     return NikonMeta(
         fn=os.path.basename(fn),
         label=label,
@@ -51,8 +51,22 @@ def scan_nksc_param_dir(path:str) -> list[NikonMeta]:
     fns = glob.glob(f'{path}/NKSC_PARAM/*.nksc')
     fns.sort()
     return [read_nikon_meta(fn) for fn in fns]
-    
+
+
+def nikon_s1(src:str, dest:str):
+    os.makedirs(f'{dest}/NKSC_PARAM', exist_ok=True)
+    metas = scan_nksc_param_dir(src)
+    copy_set = {}
+    for meta in metas:
+        if meta.rating != 'UNSET' or meta.label != 'UNSET':
+            id = meta.fn.partition('.')[0]
+            copy_set[id] = id
+    print(copy_set)
+
+        
 
 if __name__ == '__main__':
-    scan_nksc_param_dir(f'{os.environ["HOME"]}/Z0/NIKON/007')
+    # scan_nksc_param_dir(f'{os.environ["HOME"]}/Z0/NIKON/007')
+    nikon_s1(f'{os.environ["HOME"]}/Z0/NIKON/007',
+        f'{os.environ["HOME"]}/Z0/N1')
 
