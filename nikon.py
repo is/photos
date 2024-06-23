@@ -82,6 +82,6 @@ def nikon_s1(src:str, dest:str):
 
 if __name__ == '__main__':
     # scan_nksc_param_dir(f'{os.environ["HOME"]}/Z0/NIKON/007')
-    nikon_s1(f'{os.environ["HOME"]}/Z0/NIKON/006',
+    nikon_s1(f'{os.environ["HOME"]}/Z0/NIKON/20240518',
         f'{os.environ["HOME"]}/Z0/NI')
 

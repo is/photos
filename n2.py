@@ -72,6 +72,8 @@ def main():
             do_rename(fn_nef, dest_fn_nef, True, dryrun)
             move_set.add(fn_nef)
 
+    keep_set = set(move_set)
+
     dest_dir = os.path.join(HOLD_DIR, date_str)
     if not os.path.isdir(dest_dir):
         os.makedirs(dest_dir, exist_ok=True)
@@ -80,6 +82,8 @@ def main():
     fset_xmp.sort()    
     for fn in fset_xmp:
         fn_nef = fn.replace('.xmp', '.NEF')
+        if fn_nef in move_set:
+            continue
         base_fn_nef = os.path.basename(fn_nef)
         dest_fn_nef = os.path.join(dest_dir, base_fn_nef)
         do_rename(fn_nef, dest_fn_nef, True, dryrun)
@@ -93,6 +97,11 @@ def main():
         base_fn_nef = os.path.basename(fn)
         dest_fn_nef = os.path.join(dest_dir, base_fn_nef)
         do_rename(fn, dest_fn_nef, False, dryrun)
+        move_set.add(fn)
+
+    move_keep = len(keep_set)
+    move_hold = len(move_set) - move_keep
+    L.info(f"KEEP:{move_keep}, HOLD:{move_hold}")
 
 
 def do_rename(src, dest, with_xmp, dryrun):
